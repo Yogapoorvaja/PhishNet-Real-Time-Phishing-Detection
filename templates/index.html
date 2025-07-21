@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>PhishNet - Real-Time Phishing Detector</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>🔒 PhishNet</h1>
+    <form method="POST">
+      <input type="text" name="url" placeholder="Enter suspicious URL" required>
+      <button type="submit">Analyze</button>
+    </form>
+
+    {% if result %}
+    <div class="results">
+      <h2>Results for: {{ result.url }}</h2>
+      <p><strong>Phishing Score:</strong> {{ result.phishing_score }}/100</p>
+      <ul>
+        {% for reason in result.phishing_reasons %}
+        <li>⚠️ {{ reason }}</li>
+        {% endfor %}
+      </ul>
+      <p><strong>Cloaking Suspected:</strong> {{ result.cloaking_suspected }}</p>
+      <p><strong>HTML Difference:</strong> {{ result.cloaking_difference }}</p>
+    </div>
+    {% endif %}
+  </div>
+</body>
+</html>
